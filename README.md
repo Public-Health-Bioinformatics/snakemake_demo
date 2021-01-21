@@ -1,4 +1,5 @@
 # Snakemake: How to install and use
 
+Public Health Bioinormatics (Hsiao's lab)
 
-<a href="Intro_snakemake.ipynb">Demo 1</a>
+The jupyter notebook is available at <a href="Intro_snakemake.ipynb"></a>
