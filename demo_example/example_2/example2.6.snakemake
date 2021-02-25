@@ -1,0 +1,15 @@
+SAMPLES, = glob_wildcards("data/{sampleName}.fastq")
+
+rule all:
+    input:
+        expand("fastqc_result/{sampleName}_fastqc.html", sampleName=SAMPLES)
+    
+rule fastqc:
+    input:
+        "data/{sampleName}.fastq",
+    output:
+        "fastqc_result/{sampleName}_fastqc.html"
+    conda: 
+        "env.yml"
+    shell:
+        "fastqc {input} -o fastqc_result"

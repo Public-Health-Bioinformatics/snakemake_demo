@@ -1,0 +1,28 @@
+SAMPLES, = glob_wildcards("data/{sample}.fastq")
+
+rule all:
+    input:
+        "multiqc_result/multiqc_report.html",
+
+rule fastqc:
+    input:
+        "data/{sampleName}.fastq",
+    output:
+        "fastqc_result/{sampleName}_fastqc.html"
+    conda: 
+        "env.yml"
+    params:
+        threads= "3"
+    shell:
+        "fastqc -t {params.threads} {input} -o fastqc_result"
+
+
+rule multiqc: 
+    input: 
+        expand("fastqc_result/{sampleName}_fastqc.html", sampleName=SAMPLES)
+    output:
+        "multiqc_result/multiqc_report.html"
+    conda: 
+        "env.yml"
+    shell:
+        "multiqc fastqc_result -o multiqc_result"

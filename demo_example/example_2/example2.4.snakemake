@@ -1,0 +1,15 @@
+rule all:
+    input:
+        "fastqc_result/Sample1_fastqc.html",
+        "fastqc_result/Sample2_fastqc.html",
+    
+rule fastqc:
+    input:
+        "data/{sampleName}.fastq",
+    output:
+        "fastqc_result/{sampleName}_fastqc.html"
+    conda: 
+        "env.yml"
+    shell:
+        "fastqc {input} -o fastqc_result"
+

@@ -1,14 +1,9 @@
-SAMPLES = ["Sample1", "Sample2", "Sample3"]
-
-
-rule fastqc: 
-    input: 
-        expand("data/{sample}.fastq", sample=SAMPLES)
+rule fastqc:
+    input:
+        "data/Sample1.fastq"
     output:
-        expand("data/{sample}_fastqc.html", sample=SAMPLES)
+        "fastqc_result/Sample1_fastqc.html"
     conda: 
         "env.yml"
-    params: 
-        threads = "1"
     shell:
-        "fastqc -t {params.threads} {input}"
+        "fastqc data/Sample1.fastq -o fastqc_result"
